@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.nitj.nitjadminapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.NITJAdminApp">
+        <activity
+            android:name=".screens.DeleteNotice"
+            android:exported="false" />
+        <activity
+            android:name=".screens.AddUpdateFaculty"
+            android:exported="false"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".screens.Faculty"
+            android:exported="false"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".screens.AllBranches"
+            android:exported="false"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".screens.UploadEbook"
+            android:exported="false"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".screens.UploadGalleryImages"
+            android:exported="false"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".screens.UploadNotice"
+            android:exported="false"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".screens.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

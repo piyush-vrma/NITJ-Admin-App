@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.AddUpdateFaculty">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/teacherProfileImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/teacher_logo"
+                app:civ_border_color="@color/nitJ_primary"
+                app:civ_border_width="1dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="25dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/addTeacherName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/name"
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="25dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/addTeacherDesignation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/designation"
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addTeacherDepartment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/department"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addTeacherQualification1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/qualification"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLength="1000"
+                android:maxLines="3" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addTeacherQualification2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/qualification_2_masters"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLength="1000"
+                android:maxLines="3" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addTeacherQualification3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/qualification_3_bachelor_s"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLength="1000"
+                android:maxLines="3" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addTeacherEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email_id"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addTeacherResearchInterests"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/research_interests"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLength="2000"
+                android:maxLines="5" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addTeacherFax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/fax"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnAddTeacher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/add_faculty"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <LinearLayout
+            android:id="@+id/updateDeleteButtonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnUpdateTeacher"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="@string/updateTeacher"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btnDeleteTeacher"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/delete_faculty"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/red"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

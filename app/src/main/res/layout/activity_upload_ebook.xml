@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:id="@+id/ebookLayout"
+    tools:context=".screens.UploadEbook">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/selectEbook"
+            android:layout_width="130dp"
+            android:layout_height="150dp"
+            android:layout_margin="25dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/circle_green"
+                    android:padding="15dp"
+                    android:src="@drawable/ic_pdf_white" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/lightGrey" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    android:text="@string/select_ebook"
+                    android:textColor="@color/textColor"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/fileNameTextField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:gravity="center"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="15dp"
+            android:text="@string/no_book_pdf_selected" />
+
+        <EditText
+            android:id="@+id/ebookTitle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/custom_input"
+            android:drawableStart="@drawable/custom_ebook_title_icon"
+            android:drawablePadding="12dp"
+            android:inputType="text"
+            android:hint="@string/ebook_title"
+            android:padding="15dp" />
+
+        <Spinner
+            android:id="@+id/selectDepartmentForEbookSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/custom_spinner"
+            android:gravity="center"
+            android:padding="15dp"
+            android:spinnerMode="dropdown" />
+
+        <Button
+            android:id="@+id/uploadEbookButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:background="@drawable/custom_input"
+            android:text="@string/upload_ebook"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/facultyTile"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="145dp"
+        android:background="@color/tileBackgroundLight"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="12dp"
+            android:layout_weight="2">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgFacultyProfileImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/teacher_logo"
+                app:civ_border_color="@color/nitJ_primary"
+                app:civ_border_width="1dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="4"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtFacultyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/facultyName"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/txtDesignation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/designationFaculty"
+                android:textColor="@color/teal_700"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtFacultyEmailId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/email"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/researchTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/researchInterest"
+                android:textColor="@color/textColor"
+                android:textStyle="bold"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/txtFacultyResearchInterest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@string/content"
+                android:textColor="@color/textColor"
+                android:textSize="11sp"
+                android:layout_marginBottom="3dp"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

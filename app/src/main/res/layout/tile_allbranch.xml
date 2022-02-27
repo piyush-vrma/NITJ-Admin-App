@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llContent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="6dp"
+    app:cardCornerRadius="25dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@color/tileBackgroundLight"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="12dp"
+            android:layout_weight="2">
+
+            <ImageView
+                android:id="@+id/imgDepartmentLogo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/teacher_logo"
+                app:civ_border_color="@color/nitJ_primary"
+                app:civ_border_width="1dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="4"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtDepartmentName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/departmentName"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/txtNoOfFaculty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/facultyNo"
+                android:textColor="@color/teal_700"
+                android:textSize="15sp" />
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+               <TextView
+                   android:id="@+id/hod"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="4dp"
+                   android:text="HOD : "
+                   android:textColor="@color/purple_700"
+                   android:textSize="13sp" />
+               <TextView
+                   android:id="@+id/hodMail"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="4dp"
+                   android:text="@string/email"
+                   android:textColor="@color/colorPrimary"
+                   android:textSize="13sp" />
+           </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/office"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Office : "
+                    android:textColor="@color/purple_700"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/officeMail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/email"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
