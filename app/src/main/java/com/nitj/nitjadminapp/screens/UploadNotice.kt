@@ -3,11 +3,11 @@ package com.nitj.nitjadminapp.screens
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -40,6 +40,7 @@ class UploadNotice : AppCompatActivity() {
         }
 
         uploadNoticeButton.setOnClickListener {
+            noticeTitle.clearFocus()
             when {
                 noticeTitle.text.toString().trim().isEmpty() -> {
                     noticeTitle.error = "Please enter Notice Title"
@@ -55,6 +56,7 @@ class UploadNotice : AppCompatActivity() {
         }
     }
 
+
     private fun uploadImage() {
         firebaseStorageManager = FirebaseStorageManager()
         firebaseStorageManager.uploadImageToFirebaseStorage(
@@ -65,6 +67,7 @@ class UploadNotice : AppCompatActivity() {
             noticeImageView
         )
         imageUri = null
+
     }
 
 

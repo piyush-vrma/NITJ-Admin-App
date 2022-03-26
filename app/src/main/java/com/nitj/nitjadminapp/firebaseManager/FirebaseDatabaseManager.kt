@@ -15,18 +15,48 @@ import android.widget.Toast
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.core.app.ActivityCompat
 import com.google.firebase.database.FirebaseDatabase
+import com.google.gson.Gson
 import com.nitj.nitjadminapp.R
+import com.nitj.nitjadminapp.firebaseNotifications.NotificationData
+import com.nitj.nitjadminapp.firebaseNotifications.PushNotification
+import com.nitj.nitjadminapp.firebaseNotifications.RetrofitInstance
 import com.nitj.nitjadminapp.models.FacultyData
 import com.nitj.nitjadminapp.models.NoticeData
 import com.nitj.nitjadminapp.util.ConnectionManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+
+const val TOPIC = "/topic/myTopic"
 
 class FirebaseDatabaseManager {
 
     private val TAG = "FirebaseDatabaseManager"
     private var databaseRef = FirebaseDatabase.getInstance().reference
+
+    // notification send function
+    private fun sendNotification(context:Context,notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
+        try{
+            val response = RetrofitInstance.api.postNotification(notification)
+            if(response.isSuccessful){
+                print("Successful ${Gson().toJson(response)}")
+                Log.d(TAG,"Positive Response:${Gson().toJson(response)}")
+            }else{
+                Log.e(TAG,response.errorBody().toString())
+            }
+        }catch (e:Exception){
+            Log.e(TAG,e.toString())
+            Toast.makeText(
+                context,
+                "$e\nSomething went wrong : Notification Failed",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 
     fun uploadNoticeData(
         context: Context,
@@ -50,6 +80,11 @@ class FirebaseDatabaseManager {
                         .show()
                     progressDialog.dismiss()
                     clearFields(textField, imageView, null, null, null)
+
+                    // Sending Notice Upload Notification
+                    PushNotification(NotificationData("New Notice Uploaded",noticeData.title), TOPIC).also {
+                        sendNotification(context,it)
+                    }
                 }.addOnFailureListener {
                     clearFields(textField, imageView, null, null, null)
                     progressDialog.dismiss()

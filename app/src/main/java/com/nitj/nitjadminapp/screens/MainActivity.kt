@@ -4,7 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.cardview.widget.CardView
+import com.google.firebase.messaging.FirebaseMessaging
 import com.nitj.nitjadminapp.R
+import com.nitj.nitjadminapp.firebaseNotifications.Constants.Companion.TOPIC
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +22,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         bindViews()
+
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
+
         addNotice.setOnClickListener {
             val addNoticeIntent = Intent(this, UploadNotice::class.java)
             startActivity(addNoticeIntent)
