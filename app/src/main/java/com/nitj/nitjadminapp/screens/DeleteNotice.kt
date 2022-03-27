@@ -58,7 +58,7 @@ class DeleteNotice : AppCompatActivity() {
                             progressBar.visibility = View.GONE
                         } else {
                             noticeList.clear()
-                            for (data in dataSnapshot.children) {
+                            for (data in dataSnapshot.children.reversed()) {
                                 val noticeData = data.getValue(NoticeData::class.java)
                                 noticeList.add(noticeData!!)
                             }
