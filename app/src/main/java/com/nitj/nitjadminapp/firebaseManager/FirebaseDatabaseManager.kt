@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.provider.Settings
 import android.util.Log
 import android.view.View
@@ -12,26 +13,23 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.core.app.ActivityCompat
 import com.google.firebase.database.FirebaseDatabase
-import com.google.gson.Gson
 import com.nitj.nitjadminapp.R
-import com.nitj.nitjadminapp.firebaseNotifications.NotificationData
-import com.nitj.nitjadminapp.firebaseNotifications.PushNotification
-import com.nitj.nitjadminapp.firebaseNotifications.RetrofitInstance
+import com.nitj.nitjadminapp.firebaseNotificationJava.Constant.TOPIC
+import com.nitj.nitjadminapp.firebaseNotificationJava.NotificationData
+import com.nitj.nitjadminapp.firebaseNotificationJava.NotificationFunctions
+import com.nitj.nitjadminapp.firebaseNotificationJava.PushNotification
 import com.nitj.nitjadminapp.models.FacultyData
 import com.nitj.nitjadminapp.models.NoticeData
 import com.nitj.nitjadminapp.util.ConnectionManager
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 
-const val TOPIC = "/topic/myTopic"
+//const val TOPIC = "/topic/myTopic"
 
 class FirebaseDatabaseManager {
 
@@ -39,24 +37,24 @@ class FirebaseDatabaseManager {
     private var databaseRef = FirebaseDatabase.getInstance().reference
 
     // notification send function
-    private fun sendNotification(context:Context,notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
-        try{
-            val response = RetrofitInstance.api.postNotification(notification)
-            if(response.isSuccessful){
-                print("Successful ${Gson().toJson(response)}")
-                Log.d(TAG,"Positive Response:${Gson().toJson(response)}")
-            }else{
-                Log.e(TAG,response.errorBody().toString())
-            }
-        }catch (e:Exception){
-            Log.e(TAG,e.toString())
-            Toast.makeText(
-                context,
-                "$e\nSomething went wrong : Notification Failed",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
+//    private fun sendNotification(context:Context,notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
+//        try{
+//            val response = RetrofitInstance.api.postNotification(notification)
+//            if(response.isSuccessful){
+//                print("Successful ${Gson().toJson(response)}")
+//                Log.d(TAG,"Positive Response:${Gson().toJson(response)}")
+//            }else{
+//                Log.e(TAG,response.errorBody().toString())
+//            }
+//        }catch (e:Exception){
+//            Log.e(TAG,e.toString())
+//            Toast.makeText(
+//                context,
+//                "$e\nSomething went wrong : Notification Failed",
+//                Toast.LENGTH_SHORT
+//            ).show()
+//        }
+//    }
 
     fun uploadNoticeData(
         context: Context,
@@ -82,9 +80,21 @@ class FirebaseDatabaseManager {
                     clearFields(textField, imageView, null, null, null)
 
                     // Sending Notice Upload Notification
-                    PushNotification(NotificationData("New Notice Uploaded",noticeData.title), TOPIC).also {
-                        sendNotification(context,it)
-                    }
+
+                     val notification = PushNotification(
+                         NotificationData("New Notice Uploaded", noticeData.title,noticeData.image),
+                         TOPIC
+                    )
+
+                    NotificationFunctions.sendNotification(notification,context)
+
+            // This code is for the kotlin sendNotification method
+            // Implement using retrofit in kotlin class But it did not worked therefore we are using the
+            // above java class
+
+//                    PushNotification(NotificationData("New Notice Uploaded",noticeData.title), TOPIC).also {
+//                        sendNotification(context,it)
+//                    }
                 }.addOnFailureListener {
                     clearFields(textField, imageView, null, null, null)
                     progressDialog.dismiss()
@@ -126,6 +136,7 @@ class FirebaseDatabaseManager {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun uploadGalleryData(
         context: Context,
         progressDialog: ProgressDialog,
@@ -194,6 +205,7 @@ class FirebaseDatabaseManager {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun uploadEbookData(
         context: Context,
         progressDialog: ProgressDialog,
@@ -260,6 +272,7 @@ class FirebaseDatabaseManager {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun uploadFacultyData(
         context: Context,
         progressDialog: ProgressDialog,
@@ -320,6 +333,7 @@ class FirebaseDatabaseManager {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun updateFacultyData(
         context: Context,
         progressDialog: ProgressDialog,
@@ -503,6 +517,7 @@ class FirebaseDatabaseManager {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun formatDate(): String {
         val dateTime = LocalDateTime.now()
         val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
@@ -510,6 +525,7 @@ class FirebaseDatabaseManager {
         return formattedDate.toString().trim()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun formatTime(): String {
         val dateTime = LocalDateTime.now()
         val timeFormatter = DateTimeFormatter.ofPattern("h:m a")

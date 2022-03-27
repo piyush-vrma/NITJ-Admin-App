@@ -16,24 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NITJAdminApp">
 
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/logo" />
-
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent" />
-
-        <service android:name=".firebaseNotifications.FirebaseService"
-            android:permission="com.google.android.c2dm.permission.SEND"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
-            </intent-filter>
-        </service>
-
         <activity
             android:name=".screens.DeleteNotice"
             android:exported="false" />
@@ -71,6 +53,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
+        <service android:name=".firebaseNotificationJava.FirebaseServiceJava"
+            android:permission="com.google.android.c2dm.permission.Send"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.android.c2dm.intent.Receive"/>
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

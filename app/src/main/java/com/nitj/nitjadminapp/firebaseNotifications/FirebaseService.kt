@@ -10,6 +10,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -29,7 +30,10 @@ class FirebaseService : FirebaseMessagingService() {
 
         if (message.notification != null) {
             createNotification(message)
-            Log.e(TAG, "onMessageReceived: ${message.notification!!.title} ${message.notification!!.body} ${message.data["message"]}")
+            Log.e(
+                TAG,
+                "onMessageReceived: ${message.notification!!.title} ${message.notification!!.body} ${message.data["message"]}"
+            )
         }
     }
 
@@ -61,6 +65,7 @@ class FirebaseService : FirebaseMessagingService() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(notificationManager: NotificationManager) {
         val channelName = "channelName"
         val channel = NotificationChannel(CHANNEL_ID, channelName, IMPORTANCE_HIGH)

@@ -6,8 +6,7 @@ import android.os.Bundle
 import androidx.cardview.widget.CardView
 import com.google.firebase.messaging.FirebaseMessaging
 import com.nitj.nitjadminapp.R
-import com.nitj.nitjadminapp.firebaseNotifications.Constants.Companion.TOPIC
-
+import com.nitj.nitjadminapp.firebaseNotificationJava.Constant.TOPIC
 
 class MainActivity : AppCompatActivity() {
 
