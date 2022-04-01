@@ -6,12 +6,14 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.provider.Settings
 import android.util.Log
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.core.app.ActivityCompat
 import com.google.firebase.storage.FirebaseStorage
@@ -32,6 +34,7 @@ class FirebaseStorageManager {
     private lateinit var fileName: String
     private lateinit var noticeData: NoticeData
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun uploadImageToFirebaseStorage(
         context: Context,
         imageUri: Uri,
@@ -63,6 +66,11 @@ class FirebaseStorageManager {
                 if (storageFolderName == "Gallery") {
                     completeFilePathName =
                         "$storageFolderName/$storageSubFolderName/${LocalDateTime.now()}"
+                }
+
+                if (storageFolderName == "Slider Image") {
+                    completeFilePathName =
+                        "$storageFolderName/${textField?.text} ${LocalDateTime.now()}"
                 }
 
                 val uploadTask = storageRef.child(completeFilePathName).putFile(imageUri)
@@ -97,6 +105,15 @@ class FirebaseStorageManager {
                                     textField!!
                                 )
                             }
+                            "Slider Image" -> {
+                                firebaseDatabaseManager.uploadSliderImage(
+                                    context,
+                                    progressDialog,
+                                    downloadUrl,
+                                    textField!!,
+                                    imageView!!
+                                )
+                            }
                             else -> {
                                 progressDialog.dismiss()
                                 Toast.makeText(
@@ -109,10 +126,16 @@ class FirebaseStorageManager {
                         }
 
                     }.addOnFailureListener {
-                        if (storageFolderName == "Notice") {
-                            clearFields(textField, imageView, null, null, null)
-                        } else if (storageFolderName == "Gallery") {
-                            clearFields(textField, imageView, spinner, null, null)
+                        when (storageFolderName) {
+                            "Notice" -> {
+                                clearFields(textField, imageView, null, null, null)
+                            }
+                            "Gallery" -> {
+                                clearFields(textField, imageView, spinner, null, null)
+                            }
+                            "Slider Image" -> {
+                                clearFields(textField, imageView, null, null, null)
+                            }
                         }
                         progressDialog.dismiss()
                         Toast.makeText(
@@ -123,10 +146,16 @@ class FirebaseStorageManager {
                     }
 
                 }.addOnFailureListener {
-                    if (storageFolderName == "Notice") {
-                        clearFields(textField, imageView, null, null, null)
-                    } else if (storageFolderName == "Gallery") {
-                        clearFields(textField, imageView, spinner, null, null)
+                    when (storageFolderName) {
+                        "Notice" -> {
+                            clearFields(textField, imageView, null, null, null)
+                        }
+                        "Gallery" -> {
+                            clearFields(textField, imageView, spinner, null, null)
+                        }
+                        "Slider Image" -> {
+                            clearFields(textField, imageView, null, null, null)
+                        }
                     }
                     progressDialog.dismiss()
                     Toast.makeText(
@@ -138,10 +167,16 @@ class FirebaseStorageManager {
 
                 }
             } catch (e: Exception) {
-                if (storageFolderName == "Notice") {
-                    clearFields(textField, imageView, null, null, null)
-                } else if (storageFolderName == "Gallery") {
-                    clearFields(textField, imageView, spinner, null, null)
+                when (storageFolderName) {
+                    "Notice" -> {
+                        clearFields(textField, imageView, null, null, null)
+                    }
+                    "Gallery" -> {
+                        clearFields(textField, imageView, spinner, null, null)
+                    }
+                    "Slider Image" -> {
+                        clearFields(textField, imageView, null, null, null)
+                    }
                 }
                 progressDialog.dismiss()
                 Toast.makeText(
@@ -152,10 +187,16 @@ class FirebaseStorageManager {
                 Log.e(TAG, "Image upload Failed ${e.printStackTrace()}")
             }
         } else {
-            if (storageFolderName == "Notice") {
-                clearFields(textField, imageView, null, null, null)
-            } else if (storageFolderName == "Gallery") {
-                clearFields(textField, imageView, spinner, null, null)
+            when (storageFolderName) {
+                "Notice" -> {
+                    clearFields(textField, imageView, null, null, null)
+                }
+                "Gallery" -> {
+                    clearFields(textField, imageView, spinner, null, null)
+                }
+                "Slider Image" -> {
+                    clearFields(textField, imageView, null, null, null)
+                }
             }
             progressDialog.dismiss()
             val dialog = AlertDialog.Builder(context)
@@ -176,6 +217,7 @@ class FirebaseStorageManager {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun uploadEbookToFireBaseStorage(
         context: Context,
         fileUri: Uri,
@@ -276,6 +318,7 @@ class FirebaseStorageManager {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun uploadFacultyDataToFireBaseStorage(
         context: Context,
         fileUri: Uri,
@@ -505,6 +548,7 @@ class FirebaseStorageManager {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun formatDate(): String {
         val dateTime = LocalDateTime.now()
         val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
@@ -512,6 +556,7 @@ class FirebaseStorageManager {
         return formattedDate.toString().trim()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun formatTime(): String {
         val dateTime = LocalDateTime.now()
         val timeFormatter = DateTimeFormatter.ofPattern("h:m a")

@@ -10,12 +10,14 @@ import com.nitj.nitjadminapp.firebaseNotificationJava.Constant.TOPIC
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var addNotice: CardView;
-    lateinit var addGallery: CardView;
-    lateinit var addEbook: CardView;
-    lateinit var faculty: CardView;
-    lateinit var deleteNotice: CardView;
-
+    private lateinit var addNotice: CardView
+    private lateinit var addGallery: CardView
+    private lateinit var addEbook: CardView
+    private lateinit var faculty: CardView
+    private lateinit var deleteNotice: CardView
+    private lateinit var addHomePageSlidingImage: CardView
+    private lateinit var addStudentCorner: CardView
+    private lateinit var addDownloadLinks: CardView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +48,18 @@ class MainActivity : AppCompatActivity() {
             val deleteNoticeIntent = Intent(this, DeleteNotice::class.java)
             startActivity(deleteNoticeIntent)
         }
+        addHomePageSlidingImage.setOnClickListener {
+            val addHomePageSlidingImageIntent = Intent(this, AutoImageSlider::class.java)
+            startActivity(addHomePageSlidingImageIntent)
+        }
+        addStudentCorner.setOnClickListener {
+            val addStudentCornerIntent = Intent(this, UploadStudentCorner::class.java)
+            startActivity(addStudentCornerIntent)
+        }
+        addDownloadLinks.setOnClickListener {
+            val addDownloadLinksIntent = Intent(this, UploadDownloadOtherLInks::class.java)
+            startActivity(addDownloadLinksIntent)
+        }
     }
 
     private fun bindViews() {
@@ -54,5 +68,8 @@ class MainActivity : AppCompatActivity() {
         addGallery = findViewById(R.id.addGalleryImage)
         faculty = findViewById(R.id.faculty)
         deleteNotice = findViewById(R.id.deleteNotice)
+        addHomePageSlidingImage = findViewById(R.id.addHomePageSlidingImage)
+        addStudentCorner = findViewById(R.id.addStudentCorner)
+        addDownloadLinks = findViewById(R.id.addDownloadLinks)
     }
 }

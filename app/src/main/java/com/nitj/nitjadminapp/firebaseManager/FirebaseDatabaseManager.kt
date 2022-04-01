@@ -22,6 +22,7 @@ import com.nitj.nitjadminapp.firebaseNotificationJava.Constant.TOPIC
 import com.nitj.nitjadminapp.firebaseNotificationJava.NotificationData
 import com.nitj.nitjadminapp.firebaseNotificationJava.NotificationFunctions
 import com.nitj.nitjadminapp.firebaseNotificationJava.PushNotification
+import com.nitj.nitjadminapp.models.CommonData
 import com.nitj.nitjadminapp.models.FacultyData
 import com.nitj.nitjadminapp.models.NoticeData
 import com.nitj.nitjadminapp.util.ConnectionManager
@@ -35,6 +36,7 @@ class FirebaseDatabaseManager {
 
     private val TAG = "FirebaseDatabaseManager"
     private var databaseRef = FirebaseDatabase.getInstance().reference
+    private lateinit var progressDialog: ProgressDialog
 
     // notification send function
 //    private fun sendNotification(context:Context,notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
@@ -81,16 +83,16 @@ class FirebaseDatabaseManager {
 
                     // Sending Notice Upload Notification
 
-                     val notification = PushNotification(
-                         NotificationData("New Notice Uploaded", noticeData.title,noticeData.image),
-                         TOPIC
+                    val notification = PushNotification(
+                        NotificationData("New Notice Uploaded", noticeData.title, noticeData.image),
+                        TOPIC
                     )
 
-                    NotificationFunctions.sendNotification(notification,context)
+                    NotificationFunctions.sendNotification(notification, context)
 
-            // This code is for the kotlin sendNotification method
-            // Implement using retrofit in kotlin class But it did not worked therefore we are using the
-            // above java class
+                    // This code is for the kotlin sendNotification method
+                    // Implement using retrofit in kotlin class But it did not worked therefore we are using the
+                    // above java class
 
 //                    PushNotification(NotificationData("New Notice Uploaded",noticeData.title), TOPIC).also {
 //                        sendNotification(context,it)
@@ -135,6 +137,149 @@ class FirebaseDatabaseManager {
 
 
     }
+
+    fun uploadSliderImage(
+        context: Context,
+        progressDialog: ProgressDialog,
+        url: String,
+        textField: EditText,
+        imageView: ImageFilterView
+    ) {
+
+        if (ConnectionManager().checkConnectivity(context)) {
+
+            try {
+                databaseRef = databaseRef.child("Slider Image")
+                val uniqueKey = databaseRef.push().key.toString().trim()
+                val data = CommonData(title = textField.text.toString().trim(), url = url.trim())
+
+                databaseRef.child(uniqueKey).setValue(data).addOnSuccessListener {
+                    Log.e(TAG, "Slider Image Upload success")
+                    Toast.makeText(
+                        context,
+                        "Slider Image Uploaded Successfully",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                    progressDialog.dismiss()
+                    clearFields(textField, imageView, null, null, null)
+
+                }.addOnFailureListener {
+                    clearFields(textField, imageView, null, null, null)
+                    progressDialog.dismiss()
+                    Toast.makeText(
+                        context,
+                        "Something went wrong : Slider Image Upload Failed",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } catch (e: Exception) {
+                clearFields(textField, imageView, null, null, null)
+                progressDialog.dismiss()
+                Toast.makeText(
+                    context,
+                    "$e\nSomething went wrong : Slider Image Upload Failed",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        } else {
+            clearFields(textField, imageView, null, null, null)
+            progressDialog.dismiss()
+            val dialog = AlertDialog.Builder(context)
+            dialog.setTitle("Error")
+            dialog.setMessage("Internet Connection Not Found")
+            dialog.setPositiveButton("Open Settings") { text, listener ->
+                // Do Nothing
+                val settingIntent = Intent(Settings.ACTION_WIRELESS_SETTINGS)
+                context.startActivity(settingIntent)
+                (context as Activity).finish()
+            }
+            dialog.setNegativeButton("Exit") { text, listener ->
+                // Do Nothing
+                ActivityCompat.finishAffinity(context as Activity)
+            }
+            dialog.create()
+            dialog.show()
+        }
+
+    }
+
+    fun uploadCommonData(
+        context: Context,
+        textFieldTitle: EditText,
+        textFieldUrl: EditText,
+        folder: String,
+        subFolder: String
+    ) {
+
+        if (ConnectionManager().checkConnectivity(context)) {
+
+            progressDialog = ProgressDialog(context)
+            progressDialog.setTitle("Please Wait")
+            progressDialog.setMessage("Uploading.....")
+            progressDialog.setCancelable(false)
+            progressDialog.show()
+
+            try {
+                val completeFilePathName = "$folder/$subFolder"
+                val newRef = databaseRef.child(completeFilePathName)
+                val uniqueKey = newRef.push().key.toString().trim()
+                val data = CommonData(
+                    title = textFieldTitle.text.toString().trim(),
+                    url = textFieldUrl.text.toString().trim()
+                )
+
+                newRef.child(uniqueKey).setValue(data).addOnSuccessListener {
+                    Log.e(TAG, "$subFolder Upload success")
+                    Toast.makeText(context, "$subFolder Uploaded Successfully", Toast.LENGTH_SHORT)
+                        .show()
+                    progressDialog.dismiss()
+                    clearFields(textFieldTitle, null, null, null, null)
+                    clearFields(textFieldUrl, null, null, null, null)
+
+                }.addOnFailureListener {
+                    clearFields(textFieldTitle, null, null, null, null)
+                    clearFields(textFieldUrl, null, null, null, null)
+                    progressDialog.dismiss()
+                    Toast.makeText(
+                        context,
+                        "Something went wrong : $subFolder Upload Failed",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } catch (e: Exception) {
+                clearFields(textFieldTitle, null, null, null, null)
+                clearFields(textFieldUrl, null, null, null, null)
+                progressDialog.dismiss()
+                Toast.makeText(
+                    context,
+                    "$e\nSomething went wrong : $subFolder Upload Failed",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        } else {
+            clearFields(textFieldTitle, null, null, null, null)
+            clearFields(textFieldUrl, null, null, null, null)
+            progressDialog.dismiss()
+            val dialog = AlertDialog.Builder(context)
+            dialog.setTitle("Error")
+            dialog.setMessage("Internet Connection Not Found")
+            dialog.setPositiveButton("Open Settings") { text, listener ->
+                // Do Nothing
+                val settingIntent = Intent(Settings.ACTION_WIRELESS_SETTINGS)
+                context.startActivity(settingIntent)
+                (context as Activity).finish()
+            }
+            dialog.setNegativeButton("Exit") { text, listener ->
+                // Do Nothing
+                ActivityCompat.finishAffinity(context as Activity)
+            }
+            dialog.create()
+            dialog.show()
+        }
+
+    }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun uploadGalleryData(

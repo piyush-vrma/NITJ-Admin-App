@@ -6,7 +6,6 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NITJAdminApp">
-
+        <activity
+            android:name=".screens.UploadDownloadOtherLInks"
+            android:exported="false" />
+        <activity
+            android:name=".screens.UploadStudentCorner"
+            android:exported="false" />
+        <activity
+            android:name=".screens.AutoImageSlider"
+            android:exported="false" />
         <activity
             android:name=".screens.DeleteNotice"
             android:exported="false" />
@@ -57,20 +64,19 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/logo" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <service android:name=".firebaseNotificationJava.FirebaseServiceJava"
-            android:permission="com.google.android.c2dm.permission.Send"
-            android:exported="true">
+        <service
+            android:name=".firebaseNotificationJava.FirebaseServiceJava"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.Send">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-                <action android:name="com.google.android.c2dm.intent.Receive"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.Receive" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>
